@@ -11,6 +11,7 @@
  *  The task is to write within the `MAIN` macro below, huff code that reverts (all the time) with the custom error `OnlyHuff()`
 */
 
+#define error OnlyHuff()
 
 #define macro MAIN() = takes(0) returns(0) {
     

@@ -1,0 +1,14 @@
+
+/** 
+ *  SUM_ARRAY HUFF EXERCISE
+ *
+ *  
+ *  The task is to write within the `MAIN` macro below, write a functionality that takes an array of uint256 as an argument and returns the sum of all the numbers
+ */
+
+#define function sumArray(uint256[]) payable returns(uint256)
+
+
+#define macro MAIN() = takes(0) returns(0) {
+
+}

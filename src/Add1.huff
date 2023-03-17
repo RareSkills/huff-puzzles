@@ -1,0 +1,15 @@
+
+/** 
+ *  ADD HUFF EXERCISE
+ *
+ *  When writing solidity, we most times have to perform some mathematical operations like addition etc
+ *  
+ *  The task is to write within the `MAIN` macro below, a function that takes in a uint256, adds 1 to it and returns the new value
+ */
+
+#define function add1(uint256) payable returns(uint256)
+
+
+#define macro MAIN() = takes(0) returns(0) {
+
+}
