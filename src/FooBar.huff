@@ -6,7 +6,7 @@
  *  
  *  The task is to write within the `MAIN` macro below, huff code that mimics 2 solidity functions. 
  *      - One named `foo()` that simply returns 2,
- *      - the second named `Bar()` that simply returns 3.
+ *      - the second named `bar()` that simply returns 3.
  */
 
  #define function foo() payable returns(uint256)

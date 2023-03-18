@@ -1,13 +1,11 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: BUSL-1.1
 pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
 import {HuffConfig} from "foundry-huff/HuffConfig.sol";
 import {HuffDeployer} from "foundry-huff/HuffDeployer.sol";
 
-interface RevertCustom {
-    function nonExistentFunction() external;
-}
+interface RevertCustom {}
 
 contract RevertCustomTest is Test {
     RevertCustom public revertCustom;
@@ -19,7 +17,14 @@ contract RevertCustomTest is Test {
     }
 
     function testRevertCustom() public {
-        vm.expectRevert(bytes4(keccak256("OnlyHuff()")));
-        revertCustom.nonExistentFunction();
+        (bool success, bytes memory revertMessage) = address(revertCustom).call(
+            ""
+        );
+        assertEq(success, false, "Call expected to revert but it didn't");
+        assertEq(
+            keccak256(abi.encode(bytes4(revertMessage))),
+            keccak256(abi.encode(bytes4(keccak256("OnlyHuff()")))),
+            "Expected the call to revert with custom error 'OnlyHuff()' but it didn't "
+        );
     }
 }
