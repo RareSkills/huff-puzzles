@@ -1,0 +1,15 @@
+
+/** 
+ *  MULTIPLY HUFF EXERCISE
+ *
+ *  When writing solidity, we most times have to perform some mathematical operations like multiplication etc
+ *  
+ *  The task is to write within the `MAIN` macro below, a function named `multiply` that takes in 2 uint256s, and returns their product
+ */
+
+#define function multiply(uint256, uint256) payable returns(uint256)
+
+
+#define macro MAIN() = takes(0) returns(0) {
+
+}

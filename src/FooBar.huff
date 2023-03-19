@@ -1,0 +1,18 @@
+
+/** 
+ *  FOO_BAR HUFF EXERCISE
+ *
+ *  Majority of ethereum contracts hold logic divide this logic into functions which users can specify and call to execute a particular logic without clashing into the other
+ *  
+ *  The task is to write within the `MAIN` macro below, huff code that mimics 2 solidity functions. 
+ *      - One named `foo()` that simply returns 2,
+ *      - the second named `bar()` that simply returns 3.
+ */
+
+ #define function foo() payable returns(uint256)
+ #define function bar() payable returns(uint256)
+
+
+#define macro MAIN() = takes(0) returns(0) {
+
+}

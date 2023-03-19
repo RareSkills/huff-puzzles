@@ -1,0 +1,12 @@
+
+/** 
+ *  MY ETHER BALANCE HUFF EXERCISE
+ *
+ *  Every Ethereum account has an ether balance associated with it, which represents the amount of ether that the account currently holds.
+ *  
+ *  The task is to write within the `MAIN` macro below, huff code that retrieves the ether balance of the address that sent the transaction, also known as msg.sender in solidity. 
+ */
+
+#define macro MAIN() = takes(0) returns(0) {
+   
+}

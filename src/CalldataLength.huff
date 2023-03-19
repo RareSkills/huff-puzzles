@@ -1,0 +1,13 @@
+
+/**
+ *  CALLDATA_LENGTH HUFF EXERCISE
+ *
+ *
+ *  When a user sends a transaction to a smart contract, they can include additional data, known as calldata, which the smart contract can use to execute its logic.
+ *
+ *  The task is to write within the `MAIN` macro below, huff code to get and return the length of this calldata, 
+*/
+
+#define macro MAIN() = takes(0) returns(0) {
+    
+}
