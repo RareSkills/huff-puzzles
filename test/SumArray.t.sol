@@ -40,7 +40,7 @@ contract SumArrayTest is Test, NonMatchingSelectorHelper {
 
     /// @notice Test that a non-matching selector reverts
     function testNonMatchingSelector(bytes32 callData) public {
-        bytes4[] memory func_selectors = new bytes4[](2);
+        bytes4[] memory func_selectors = new bytes4[](1);
         func_selectors[0] = SumArray.sumArray.selector;
 
         bool success = nonMatchingSelectorHelper(

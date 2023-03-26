@@ -4,3 +4,8 @@ out = 'out'
 libs = ['lib']
 ffi = true
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config
+
+remappings = [
+    "forge-std/=lib/forge-std/src/",
+    "foundry-huff/=lib/foundry-huff/src/",
+]
