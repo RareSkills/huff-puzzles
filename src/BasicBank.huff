@@ -1,0 +1,16 @@
+/** 
+ *  BASIC_BANK HUFF EXERCISE
+ *  
+ *  The task is to create a basic bank with huff
+ * functionalities include
+ *      - depositing tokens via similar to how solidity's `receive` function works
+ *      - withdrawing tokens
+ *      - keeping track of and viewing balance
+ */
+
+#define function balanceOf(address) payable returns(uint256)
+#define function withdraw(uint256) payable returns()
+
+#define macro MAIN() = takes(0) returns(0) {
+
+}

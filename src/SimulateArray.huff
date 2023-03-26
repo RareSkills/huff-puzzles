@@ -1,0 +1,27 @@
+
+/** 
+ *  SUM_ARRAY HUFF EXERCISE
+ *
+ * In this puzzle, the task is to simulate an array in Huff. A function can; 
+ *      - Push numbers onto a array, 
+ *      - Pop the last index from the array,
+ *      - View what's stored at an index, 
+ *      - Gets the length of the array, 
+ *      - Write to an index if it is valid.
+ *
+ *      - Writes and reads outside of length revert. 
+ *      - Popping off a zero length array reverts.
+ */
+
+ #define function pushh(uint256 num) payable returns()
+ #define function popp() payable returns()
+ #define function read(uint256 index) payable returns(uint256)
+ #define function length() payable returns(uint256)
+ #define function write(uint256 index, uint256 num) payable returns()
+
+ #define error OutOfBounds()
+ #define error ZeroArray()
+
+ #define macro MAIN() = takes(0) returns(0) {
+    
+ }

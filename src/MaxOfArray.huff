@@ -1,0 +1,12 @@
+
+/** 
+ *  MAX_OF_ARRAY HUFF EXERCISE
+ *  
+ *  In this task, Given an abi encoded array of uint256, return its maximum value. Revert if the array is empty.
+ */
+
+#define function maxOfArray(uint256[]) payable returns(uint256)
+
+#define macro MAIN() = takes(0) returns(0) {
+   
+}

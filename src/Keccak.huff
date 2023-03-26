@@ -1,0 +1,13 @@
+
+/** 
+ *  KECCAK HUFF EXERCISE
+ *
+ *  When writing solidity, we some times have to perform hashing operations like keccak256 etc
+ *  
+ *  The task is to write within the `MAIN` macro below, a function that returns the keccak256 of the calldata. Should handle zero calldata
+ */
+
+
+ #define macro MAIN() = takes(0) returns(0) {
+    
+ }
