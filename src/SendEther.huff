@@ -1,0 +1,14 @@
+ 
+/** 
+ *  SEND_ETHER HUFF EXERCISE
+ *  
+ *  The task is to enable this contract, when called with function `distribute(address)` to
+ *  transfer the value sent with the call to the address in the argument.
+ */
+
+ #define function sendEther(address) payable returns()
+
+
+ #define macro MAIN() = takes(0) returns(0) {
+    
+ }

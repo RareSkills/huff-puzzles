@@ -1,0 +1,15 @@
+ /** 
+ *  EMITTER HUFF EXERCISE
+ *  
+ *  The task is to enable this contract, when the function `value(uint256, uint256)` is called, should
+ *  emit an event named `Value(uint256 indexed, uint256)`
+ */
+
+ #define function value(uint256, uint256) payable returns()
+ 
+ #define event Value(uint256 indexed, uint256)
+
+
+ #define macro MAIN() = takes(0) returns(0) {
+    
+ }

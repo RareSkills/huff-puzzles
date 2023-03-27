@@ -69,6 +69,10 @@ You should see something like this
 - [Donations](https://github.com/rareskills/huff-puzzles/blob/main/src/Donations.huff)
 - [BasicBank](https://github.com/rareskills/huff-puzzles/blob/main/src/BasicBank.huff)
 - [SimulateArray](https://github.com/rareskills/huff-puzzles/blob/main/src/SimulateArray.huff)
+- [Emitter](https://github.com/rareskills/huff-puzzles/blob/main/src/Emitter.huff)
+- [Create](https://github.com/rareskills/huff-puzzles/blob/main/src/Create.huff)
+- [SendEther](https://github.com/rareskills/huff-puzzles/blob/main/src/SendEther.huff)
+- [Distribute](https://github.com/rareskills/huff-puzzles/blob/main/src/Distribute.huff)
 
 ## More resources
 
