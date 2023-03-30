@@ -4,6 +4,8 @@
  *  
  *  The task is to enable this contract, when called with function `distribute(address)` to
  *  transfer the value sent with the call to the address in the argument.
+ *
+ *  NOTICE: The contract should revert when an unrecognized function is called
  */
 
  #define function sendEther(address) payable returns()

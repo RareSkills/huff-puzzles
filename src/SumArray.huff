@@ -4,6 +4,8 @@
  *
  *  
  *  The task is to write within the `MAIN` macro below, write a functionality that takes an array of uint256 as an argument and returns the sum of all the numbers
+ *
+ *  NOTICE: The contract should revert when an unrecognized function is called
  */
 
 #define function sumArray(uint256[]) payable returns(uint256)

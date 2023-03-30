@@ -3,6 +3,8 @@
  *  MAX_OF_ARRAY HUFF EXERCISE
  *  
  *  In this task, Given an abi encoded array of uint256, return its maximum value. Revert if the array is empty.
+ *
+ *  NOTICE: The contract should revert when an unrecognized function is called
  */
 
 #define function maxOfArray(uint256[]) payable returns(uint256)

@@ -11,6 +11,8 @@
  *
  *      - Writes and reads outside of length revert. 
  *      - Popping off a zero length array reverts.
+ *
+ *  NOTICE: The contract should revert when an unrecognized function is called
  */
 
  #define function pushh(uint256 num) payable returns()

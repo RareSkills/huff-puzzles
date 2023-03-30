@@ -6,6 +6,8 @@
  *  distribute the value sent with the call to each address in the address array as evenly.
  *  Revert if array length is 0
  *  Assume that array length would always be less than or equal to msg.value
+ *
+ *  NOTICE: The contract should revert when an unrecognized function is called
  */
 
  #define function distribute(address[]) payable returns()
