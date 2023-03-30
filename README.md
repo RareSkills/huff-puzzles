@@ -84,3 +84,4 @@ You should see something like this
 ## Contributors
 
 - [Michael Amadi](https://github.com/AmadiMichael)
+- [Jesse Raymond](https://github.com/jesserc)
