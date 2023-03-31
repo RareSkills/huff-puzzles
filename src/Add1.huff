@@ -5,6 +5,8 @@
  *  When writing solidity, we most times have to perform some mathematical operations like addition etc
  *  
  *  The task is to write within the `MAIN` macro below, a function that takes in a uint256, adds 1 to it and returns the new value
+ *
+ *  NOTICE: The contract should revert when an unrecognized function is called
  */
 
 #define function add1(uint256) payable returns(uint256)

@@ -5,6 +5,8 @@
  *  The task is to deploy this contract with a function `makeContract()` which when called creates a contract
  *  that when called with any data returns `0xcaffe`.
  *  The call to `makeContract` should return the address of the newly created contract.
+ *
+ *  NOTICE: The contract should revert when an unrecognized function is called
  */
 
  #define function makeContract() payable returns(address)

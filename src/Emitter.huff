@@ -3,6 +3,8 @@
  *  
  *  The task is to enable this contract, when the function `value(uint256, uint256)` is called, should
  *  emit an event named `Value(uint256 indexed, uint256)`
+ *
+ *  NOTICE: The contract should revert when an unrecognized function is called
  */
 
  #define function value(uint256, uint256) payable returns()
