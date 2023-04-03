@@ -13,12 +13,11 @@ contract KeccakTest is Test, NonMatchingSelectorHelper {
         keccak = HuffDeployer.config().deploy("Keccak");
     }
 
-    function testKeccak(bytes memory data) public {
-        bytes32 expectedHash;
-        assembly {
-            expectedHash := keccak256(add(0x20, data), mload(data))
-        }
-        (bool success, bytes memory res) = keccak.call(data);
+    function testKeccak() public /**bytes memory data*/ {
+        bytes memory data = hex"abcd";
+        bytes32 expectedHash = keccak256(abi.encode(data));
+
+        (bool success, bytes memory res) = keccak.call(abi.encode(data));
         require(success, "call failed");
         assertEq(
             expectedHash,
