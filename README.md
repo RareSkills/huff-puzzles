@@ -78,7 +78,7 @@ You should see something like this
 
 - [Huff Documentation 🐴](https://docs.huff.sh/)
 - [Evm codes](https://evm.codes)
-- [Huffmate](https://github.com/pentagon-xyz/huffmate)
+- [Huffmate](https://github.com/huff-language/huffmate)
 - [Huff Console.log](https://github.com/AmadiMichael/Huff-Console)
 
 ## Contributors
