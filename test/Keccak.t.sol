@@ -4,9 +4,8 @@ pragma solidity ^0.8.13;
 import "forge-std/Test.sol";
 import {HuffConfig} from "foundry-huff/HuffConfig.sol";
 import {HuffDeployer} from "foundry-huff/HuffDeployer.sol";
-import {NonMatchingSelectorHelper} from "./test-utils/NonMatchingSelectorHelper.sol";
 
-contract KeccakTest is Test, NonMatchingSelectorHelper {
+contract KeccakTest is Test {
     address public keccak;
 
     function setUp() public {
