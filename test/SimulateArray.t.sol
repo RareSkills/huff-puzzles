@@ -71,7 +71,7 @@ contract SimulateArrayTest is Test, NonMatchingSelectorHelper {
         assertEq(simulateArray.read(1), 346, "expected arr[1] to be 346");
 
         simulateArray.popp();
-        assertEq(simulateArray.length(), 2, "expected length to be 2");
+        assertEq(simulateArray.length(), 1, "expected length to be 1");
         assertEq(simulateArray.read(0), 122, "expected arr[0] to be 122");
         vm.expectRevert(bytes4(keccak256("OutOfBounds()")));
         simulateArray.read(1);
