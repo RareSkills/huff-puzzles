@@ -66,13 +66,13 @@ You should see something like this
 - [SumArray](https://github.com/rareskills/huff-puzzles/blob/main/src/SumArray.huff)
 - [Keccak](https://github.com/rareskills/huff-puzzles/blob/main/src/Keccak.huff)
 - [MaxOfArray](https://github.com/rareskills/huff-puzzles/blob/main/src/MaxOfArray.huff)
-- [Donations](https://github.com/rareskills/huff-puzzles/blob/main/src/Donations.huff)
-- [BasicBank](https://github.com/rareskills/huff-puzzles/blob/main/src/BasicBank.huff)
-- [SimulateArray](https://github.com/rareskills/huff-puzzles/blob/main/src/SimulateArray.huff)
-- [Emitter](https://github.com/rareskills/huff-puzzles/blob/main/src/Emitter.huff)
 - [Create](https://github.com/rareskills/huff-puzzles/blob/main/src/Create.huff)
+- [Emitter](https://github.com/rareskills/huff-puzzles/blob/main/src/Emitter.huff)
+- [Donations](https://github.com/rareskills/huff-puzzles/blob/main/src/Donations.huff)
 - [SendEther](https://github.com/rareskills/huff-puzzles/blob/main/src/SendEther.huff)
+- [BasicBank](https://github.com/rareskills/huff-puzzles/blob/main/src/BasicBank.huff)
 - [Distribute](https://github.com/rareskills/huff-puzzles/blob/main/src/Distributor.huff)
+- [SimulateArray](https://github.com/rareskills/huff-puzzles/blob/main/src/SimulateArray.huff)
 
 ## More resources
 
