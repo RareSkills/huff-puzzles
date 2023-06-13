@@ -31,7 +31,7 @@ contract CallValueTest is Test {
         assertEq(
             abi.decode(retdata, (uint256)),
             0,
-            "Expected retdata to be 1 ether"
+            "Expected retdata to be 0 ether"
         );
 
         (success, retdata) = address(callValue).call{value: 0.5 ether}("");
@@ -39,7 +39,7 @@ contract CallValueTest is Test {
         assertEq(
             abi.decode(retdata, (uint256)),
             0.5 ether,
-            "Expected retdata to be 1 ether"
+            "Expected retdata to be 0.5 ether"
         );
     }
 }
