@@ -49,7 +49,7 @@ contract BasicBankTest is Test {
         assertEq(
             basicBank.balanceOf(address(this)),
             0 ether,
-            "expected balance of basic bank contract to be 1 ether"
+            "expected balance of basic bank contract to be 0 ether"
         );
     }
 
