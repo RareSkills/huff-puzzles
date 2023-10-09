@@ -19,15 +19,9 @@ contract SimpleStoreTest is Test, NonMatchingSelectorHelper {
         simpleStore = SimpleStore(HuffDeployer.config().deploy("SimpleStore"));
     }
 
-    function testSimpleStore() public {
-        simpleStore.store(42);
-        assertEq(simpleStore.read(), 42, "read() expected to return 42");
-
-        simpleStore.store(24);
-        assertEq(simpleStore.read(), 24, "read() expected to return 24");
-
-        simpleStore.store(0);
-        assertEq(simpleStore.read(), 0, "read() expected to return 0");
+    function testSimpleStore(uint256 value) public {
+        simpleStore.store(value);
+        assertEq(simpleStore.read(), value, "read() returns the wrong value");
     }
 
     /// @notice Test that a non-matching selector reverts
@@ -36,11 +30,7 @@ contract SimpleStoreTest is Test, NonMatchingSelectorHelper {
         func_selectors[0] = SimpleStore.store.selector;
         func_selectors[1] = SimpleStore.read.selector;
 
-        bool success = nonMatchingSelectorHelper(
-            func_selectors,
-            callData,
-            address(simpleStore)
-        );
+        bool success = nonMatchingSelectorHelper(func_selectors, callData, address(simpleStore));
         assert(!success);
     }
 }

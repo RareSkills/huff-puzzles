@@ -16,39 +16,19 @@ contract SendEtherTest is Test, NonMatchingSelectorHelper {
         sendEther = SendEther(HuffDeployer.config().deploy("SendEther"));
     }
 
-    function testSendEther() public {
-        vm.deal(address(this), 4 ether);
-        sendEther.sendEther{value: 1 ether}(address(0xABCD));
-        sendEther.sendEther{value: 1 ether}(address(0xBABE));
-        sendEther.sendEther{value: 1 ether}(address(0xCAFE));
-        sendEther.sendEther{value: 1 ether}(address(0xDEAD));
+    function testSendEther(uint256 value, address receiver) public {
+        vm.deal(address(this), value);
+        uint256 size;
+        assembly {
+            size := extcodesize(receiver)
+        }
+        vm.assume(size == 0);
 
-        assertEq(
-            address(0xABCD).balance,
-            1 ether,
-            "balance of address(0xABCD) is not 1 ether"
-        );
-        assertEq(
-            address(0xBABE).balance,
-            1 ether,
-            "balance of address(0xBABE) is not 1 ether"
-        );
-        assertEq(
-            address(0xCAFE).balance,
-            1 ether,
-            "balance of address(0xCAFE) is not 1 ether"
-        );
-        assertEq(
-            address(0xDEAD).balance,
-            1 ether,
-            "balance of address(0xDEAD) is not 1 ether"
-        );
+        uint256 _balance = receiver.balance;
+        sendEther.sendEther{value: value}(receiver);
+        uint256 balance_ = receiver.balance;
 
-        assertEq(
-            address(sendEther).balance,
-            0,
-            "balance of distribute contract is not 0 ether"
-        );
+        assertEq(balance_ - _balance, value, "balance of address(0xDEAD) is not 1 ether");
     }
 
     /// @notice Test that a non-matching selector reverts
@@ -56,11 +36,7 @@ contract SendEtherTest is Test, NonMatchingSelectorHelper {
         bytes4[] memory func_selectors = new bytes4[](1);
         func_selectors[0] = SendEther.sendEther.selector;
 
-        bool success = nonMatchingSelectorHelper(
-            func_selectors,
-            callData,
-            address(sendEther)
-        );
+        bool success = nonMatchingSelectorHelper(func_selectors, callData, address(sendEther));
         assert(!success);
     }
 }

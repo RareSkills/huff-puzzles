@@ -15,10 +15,6 @@ contract Return1Test is Test {
     function testReturn1() public {
         (bool success, bytes memory ret) = return1.call("");
         require(success, "call to return1 address failed");
-        assertEq(
-            abi.decode(ret, (uint256)),
-            1,
-            "Expected a call to return1 address to return 1"
-        );
+        assertEq(abi.decode(ret, (uint256)), 1, "Expected a call to return1 address to return 1");
     }
 }

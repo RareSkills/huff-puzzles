@@ -17,10 +17,10 @@ contract Add1Test is Test, NonMatchingSelectorHelper {
         add1 = Add1(HuffDeployer.config().deploy("Add1"));
     }
 
-    function testAdd1() public {
-        assertEq(add1.add1(41), 42, "Add1(41) expected to return 42");
-        assertEq(add1.add1(23), 24, "Add1(23) expected to return 24");
-        assertEq(add1.add1(0), 1, "Add1(0) expected to return 1");
+    function testAdd1(uint256 n) public {
+        unchecked {
+            assertEq(add1.add1(n), n + 1, "Wrong return number");
+        }
     }
 
     /// @notice Test that a non-matching selector reverts
@@ -28,11 +28,7 @@ contract Add1Test is Test, NonMatchingSelectorHelper {
         bytes4[] memory func_selectors = new bytes4[](1);
         func_selectors[0] = Add1.add1.selector;
 
-        bool success = nonMatchingSelectorHelper(
-            func_selectors,
-            callData,
-            address(add1)
-        );
+        bool success = nonMatchingSelectorHelper(func_selectors, callData, address(add1));
         assert(!success);
     }
 }

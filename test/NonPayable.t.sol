@@ -14,13 +14,15 @@ contract NonPayableTest is Test {
         nonPayable = NonPayable(HuffDeployer.config().deploy("NonPayable"));
     }
 
-    function testNonPayable() public {
-        vm.deal(address(this), 1 ether);
+    function testNonPayable(uint256 value) public {
+        vm.deal(address(this), value);
 
-        (bool success, ) = address(nonPayable).call{value: 0 ether}("");
-        assertEq(success, true, "call did not pass as expected");
+        bool expected;
+        if (value == 0) {
+            expected = true;
+        }
 
-        (success, ) = address(nonPayable).call{value: 1 ether}("");
-        assertEq(success, false, "call did not fail as expected");
+        (bool success,) = address(nonPayable).call{value: value}("");
+        assertEq(success, expected, "call did not pass as expected");
     }
 }

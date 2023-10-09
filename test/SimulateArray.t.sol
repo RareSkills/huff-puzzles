@@ -22,59 +22,35 @@ contract SimulateArrayTest is Test, NonMatchingSelectorHelper {
     SimulateArray public simulateArray;
 
     function setUp() public {
-        simulateArray = SimulateArray(
-            HuffDeployer.config().deploy("SimulateArray")
-        );
+        simulateArray = SimulateArray(HuffDeployer.config().deploy("SimulateArray"));
     }
 
-    function testSimulateArrayReverts() external {
-        assertEq(
-            simulateArray.length(),
-            0,
-            "length is initially meant to be 0"
-        );
-
+    function testSimulateArray(uint256[] memory array) external {
         vm.expectRevert(bytes4(keccak256("ZeroArray()")));
         simulateArray.popp();
 
-        vm.expectRevert(bytes4(keccak256("OutOfBounds()")));
-        simulateArray.read(0);
+        assertEq(simulateArray.length(), 0, "length is initially meant to be 0");
 
-        vm.expectRevert(bytes4(keccak256("OutOfBounds()")));
-        simulateArray.write(0, 1);
-    }
+        for (uint256 i; i < array.length; ++i) {
+            simulateArray.pushh(array[i]);
+            assertEq(simulateArray.read(i), array[i], "Wrong value");
+            uint256 writeIndex = bound(array.length, 0, i);
+            simulateArray.write(writeIndex, array[i]);
+            assertEq(simulateArray.read(writeIndex), array[i], "Wrong value");
+            assertEq(simulateArray.length(), i + 1, "Wrong length");
+        }
 
-    function testSimulateArray() external {
-        assertEq(
-            simulateArray.length(),
-            0,
-            "length is initially meant to be 0"
-        );
+        for (uint256 i = array.length; i > 0; --i) {
+            simulateArray.popp();
+            vm.expectRevert(bytes4(keccak256("OutOfBounds()")));
+            simulateArray.read(i - 1);
+            vm.expectRevert(bytes4(keccak256("OutOfBounds()")));
+            simulateArray.write(i - 1, array[i - 1]);
+            assertEq(simulateArray.length(), i - 1, "Wrong length");
+        }
 
-        simulateArray.pushh(42);
-        assertEq(simulateArray.length(), 1, "expected length to be 1");
-        assertEq(simulateArray.read(0), 42, "expected arr[0] to be 42");
-
-        simulateArray.pushh(24);
-        assertEq(simulateArray.length(), 2, "expected length to be 2");
-        assertEq(simulateArray.read(0), 42, "expected arr[0] to be 42");
-        assertEq(simulateArray.read(1), 24, "expected arr[1] to be 24");
-
-        simulateArray.write(0, 122);
-        assertEq(simulateArray.length(), 2, "expected length to be 2");
-        assertEq(simulateArray.read(0), 122, "expected arr[0] to be 122");
-        assertEq(simulateArray.read(1), 24, "expected arr[1] to be 24");
-
-        simulateArray.write(1, 346);
-        assertEq(simulateArray.length(), 2, "expected length to be 2");
-        assertEq(simulateArray.read(0), 122, "expected arr[0] to be 122");
-        assertEq(simulateArray.read(1), 346, "expected arr[1] to be 346");
-
+        vm.expectRevert(bytes4(keccak256("ZeroArray()")));
         simulateArray.popp();
-        assertEq(simulateArray.length(), 1, "expected length to be 1");
-        assertEq(simulateArray.read(0), 122, "expected arr[0] to be 122");
-        vm.expectRevert(bytes4(keccak256("OutOfBounds()")));
-        simulateArray.read(1);
     }
 
     /// @notice Test that a non-matching selector reverts
@@ -86,11 +62,7 @@ contract SimulateArrayTest is Test, NonMatchingSelectorHelper {
         func_selectors[3] = SimulateArray.length.selector;
         func_selectors[4] = SimulateArray.write.selector;
 
-        bool success = nonMatchingSelectorHelper(
-            func_selectors,
-            callData,
-            address(simulateArray)
-        );
+        bool success = nonMatchingSelectorHelper(func_selectors, callData, address(simulateArray));
         assert(!success);
     }
 }

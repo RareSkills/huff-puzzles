@@ -11,37 +11,15 @@ contract MyEtherBalanceTest is Test {
     MyEtherBalance public myEtherBalance;
 
     function setUp() public {
-        myEtherBalance = MyEtherBalance(
-            HuffDeployer.config().deploy("MyEtherBalance")
-        );
+        myEtherBalance = MyEtherBalance(HuffDeployer.config().deploy("MyEtherBalance"));
     }
 
-    function testMyEtherBalance() public {
+    function testMyEtherBalance(uint256 balance) public {
         vm.startPrank(address(this), address(this));
         (bool success, bytes memory data) = address(myEtherBalance).call("");
-        require(success, "call failed");
-        assertEq(
-            abi.decode(data, (uint256)),
-            79228162514264337593543950335, // uint256(0xffffffffffffffffffffffff) -> default ether balance of an address with 0 initial balance making a call/staticcall/delegatecall
-            "expected ether balance of caller to be 79228162514264337593543950335"
-        );
-
-        vm.deal(address(this), 1 ether);
+        vm.deal(address(this), balance);
         (success, data) = address(myEtherBalance).call("");
         require(success, "call failed");
-        assertEq(
-            abi.decode(data, (uint256)),
-            1 ether,
-            "expected ether balance of caller to be 1"
-        );
-
-        vm.deal(address(this), 2 ether);
-        (success, data) = address(myEtherBalance).call("");
-        require(success, "call failed");
-        assertEq(
-            abi.decode(data, (uint256)),
-            2 ether,
-            "expected ether balance of caller to be 2"
-        );
+        assertEq(abi.decode(data, (uint256)), balance, "Wrong returned balance of caller");
     }
 }

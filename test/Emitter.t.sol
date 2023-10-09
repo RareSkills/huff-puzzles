@@ -11,6 +11,7 @@ interface Emitter {
 
 contract EmitterTest is Test, NonMatchingSelectorHelper {
     Emitter public emitter;
+
     event Value(uint256 indexed, uint256);
 
     function setUp() public {
@@ -18,7 +19,7 @@ contract EmitterTest is Test, NonMatchingSelectorHelper {
     }
 
     function testEmitter() public {
-        vm.expectEmit(true, true, false, false);
+        vm.expectEmit(true, true, false, true);
         emit Value(42, 24);
         emitter.value(42, 24);
     }
@@ -28,11 +29,7 @@ contract EmitterTest is Test, NonMatchingSelectorHelper {
         bytes4[] memory func_selectors = new bytes4[](1);
         func_selectors[0] = Emitter.value.selector;
 
-        bool success = nonMatchingSelectorHelper(
-            func_selectors,
-            callData,
-            address(emitter)
-        );
+        bool success = nonMatchingSelectorHelper(func_selectors, callData, address(emitter));
         assert(!success);
     }
 }
