@@ -19,11 +19,15 @@ contract MultiplyTest is Test, NonMatchingSelectorHelper {
 
     function testMultiply(uint256 a, uint256 b) public {
         unchecked {
-            if (b == 0 || a == (a * b) / b) {
-                assertEq(multiply.multiply(a, b), a * b, "Wrong result for Multiply(a, b)");
-            } else {
+            (uint256 greater, uint256 lesser) = a > b ? (a, b) : (b, a);
+
+            if (lesser == 0 || greater == 0) {
+                assertEq(multiply.multiply(a, b), 0, "Wrong result for Multiply(a, b)");
+            } else if (greater * lesser < greater) {
                 vm.expectRevert();
                 multiply.multiply(a, b);
+            } else {
+                assertEq(multiply.multiply(a, b), a * b, "Wrong result for Multiply(a, b)");
             }
         }
     }
