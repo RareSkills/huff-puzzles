@@ -28,13 +28,17 @@ contract BasicBankTest is Test {
 
     function testRemoveEther(uint256 value) external {
         vm.deal(address(this), value);
-        vm.expectRevert();
-        basicBank.withdraw(1);
         (bool success,) = address(basicBank).call{value: value}("");
         require(success, "deposit failed");
         basicBank.withdraw(value);
         assertEq(address(this).balance, value, "Wrong balance of depositor");
         assertEq(basicBank.balanceOf(address(this)), 0 ether, "Balance of basic bank contract should be 0");
+    }
+
+    function testWithdrawRevertWithoutDeposit(uint256 value) external {
+        vm.assume(value > 0);
+        vm.expectRevert();
+        basicBank.withdraw(value);
     }
 
     receive() external payable {}
