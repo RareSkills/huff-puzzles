@@ -14,32 +14,10 @@ contract CallValueTest is Test {
         callValue = CallValue(HuffDeployer.config().deploy("CallValue"));
     }
 
-    function testCallValue() public {
-        vm.deal(address(this), 2 ether);
-        (bool success, bytes memory retdata) = address(callValue).call{
-            value: 1 ether
-        }("");
+    function testCallValue(uint256 value) public {
+        vm.deal(address(this), value);
+        (bool success, bytes memory retdata) = address(callValue).call{value: value}("");
         require(success, "call failed");
-        assertEq(
-            abi.decode(retdata, (uint256)),
-            1 ether,
-            "Expected retdata to be 1 ether"
-        );
-
-        (success, retdata) = address(callValue).call("");
-        require(success, "call failed");
-        assertEq(
-            abi.decode(retdata, (uint256)),
-            0,
-            "Expected retdata to be 0 ether"
-        );
-
-        (success, retdata) = address(callValue).call{value: 0.5 ether}("");
-        require(success, "call failed");
-        assertEq(
-            abi.decode(retdata, (uint256)),
-            0.5 ether,
-            "Expected retdata to be 0.5 ether"
-        );
+        assertEq(abi.decode(retdata, (uint256)), value, "Wrong retdata");
     }
 }

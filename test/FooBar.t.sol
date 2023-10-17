@@ -30,11 +30,7 @@ contract FooBarTest is Test, NonMatchingSelectorHelper {
         func_selectors[0] = FooBar.foo.selector;
         func_selectors[1] = FooBar.bar.selector;
 
-        bool success = nonMatchingSelectorHelper(
-            func_selectors,
-            callData,
-            address(fooBar)
-        );
+        bool success = nonMatchingSelectorHelper(func_selectors, callData, address(fooBar));
         assert(!success);
     }
 }

@@ -11,15 +11,11 @@ contract RevertCustomTest is Test {
     RevertCustom public revertCustom;
 
     function setUp() public {
-        revertCustom = RevertCustom(
-            HuffDeployer.config().deploy("RevertCustom")
-        );
+        revertCustom = RevertCustom(HuffDeployer.config().deploy("RevertCustom"));
     }
 
     function testRevertCustom() public {
-        (bool success, bytes memory revertMessage) = address(revertCustom).call(
-            ""
-        );
+        (bool success, bytes memory revertMessage) = address(revertCustom).call("");
         assertEq(success, false, "Call expected to revert but it didn't");
         assertEq(
             keccak256(abi.encode(bytes4(revertMessage))),

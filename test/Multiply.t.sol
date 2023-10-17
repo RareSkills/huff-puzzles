@@ -7,10 +7,7 @@ import {HuffDeployer} from "foundry-huff/HuffDeployer.sol";
 import {NonMatchingSelectorHelper} from "./test-utils/NonMatchingSelectorHelper.sol";
 
 interface Multiply {
-    function multiply(
-        uint256 num1,
-        uint256 num2
-    ) external pure returns (uint256);
+    function multiply(uint256 num1, uint256 num2) external pure returns (uint256);
 }
 
 contract MultiplyTest is Test, NonMatchingSelectorHelper {
@@ -20,20 +17,15 @@ contract MultiplyTest is Test, NonMatchingSelectorHelper {
         multiply = Multiply(HuffDeployer.config().deploy("Multiply"));
     }
 
-    function testMultiply() public {
-        assertEq(
-            multiply.multiply(2, 3),
-            6,
-            "Multiply(2, 3) expected to return 6"
-        );
-        assertEq(
-            multiply.multiply(0, 1),
-            0,
-            "Multiply(0, 1) expected to return 0"
-        );
-
-        vm.expectRevert();
-        multiply.multiply(2, type(uint256).max);
+    function testMultiply(uint256 a, uint256 b) public {
+        unchecked {
+            if (b == 0 || a == (a * b) / b) {
+                assertEq(multiply.multiply(a, b), a * b, "Wrong result for Multiply(a, b)");
+            } else {
+                vm.expectRevert();
+                multiply.multiply(a, b);
+            }
+        }
     }
 
     /// @notice Test that a non-matching selector reverts
@@ -41,11 +33,7 @@ contract MultiplyTest is Test, NonMatchingSelectorHelper {
         bytes4[] memory func_selectors = new bytes4[](1);
         func_selectors[0] = Multiply.multiply.selector;
 
-        bool success = nonMatchingSelectorHelper(
-            func_selectors,
-            callData,
-            address(multiply)
-        );
+        bool success = nonMatchingSelectorHelper(func_selectors, callData, address(multiply));
         assert(!success);
     }
 }

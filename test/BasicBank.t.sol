@@ -18,39 +18,23 @@ contract BasicBankTest is Test {
         basicBank = BasicBank(HuffDeployer.config().deploy("BasicBank"));
     }
 
-    function testDeposit() external {
-        vm.deal(address(this), 1 ether);
-        (bool success, ) = address(basicBank).call{value: 1 ether}("");
+    function testDeposit(uint256 value) external {
+        vm.deal(address(this), value);
+        (bool success,) = address(basicBank).call{value: value}("");
         require(success, "deposit failed");
-        assertEq(
-            address(basicBank).balance,
-            1 ether,
-            "expected balance of basic bank contract to be 1 ether"
-        );
-        assertEq(
-            basicBank.balanceOf(address(this)),
-            1 ether,
-            "expected balance of basic bank contract to be 1 ether"
-        );
+        assertEq(address(basicBank).balance, value, "Wrong balance of basic bank contract");
+        assertEq(basicBank.balanceOf(address(this)), value, "Wrong balance of depositor");
     }
 
-    function testRemoveEther() external {
-        vm.deal(address(this), 1 ether);
+    function testRemoveEther(uint256 value) external {
+        vm.deal(address(this), value);
         vm.expectRevert();
         basicBank.withdraw(1);
-        (bool success, ) = address(basicBank).call{value: 1 ether}("");
+        (bool success,) = address(basicBank).call{value: value}("");
         require(success, "deposit failed");
-        basicBank.withdraw(1 ether);
-        assertEq(
-            address(this).balance,
-            1 ether,
-            "expected balance of address(this) to be 1 ether"
-        );
-        assertEq(
-            basicBank.balanceOf(address(this)),
-            0 ether,
-            "expected balance of basic bank contract to be 0 ether"
-        );
+        basicBank.withdraw(value);
+        assertEq(address(this).balance, value, "Wrong balance of depositor");
+        assertEq(basicBank.balanceOf(address(this)), 0 ether, "Balance of basic bank contract should be 0");
     }
 
     receive() external payable {}

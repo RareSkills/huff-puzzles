@@ -18,11 +18,7 @@ contract CreateTest is Test, NonMatchingSelectorHelper {
 
     function testCreate() external {
         address newContract = create.makeContract();
-        assertEq(
-            newContract != address(0),
-            true,
-            "new contract cannot be address 0"
-        );
+        assertEq(newContract != address(0), true, "new contract cannot be address 0");
 
         (bool success, bytes memory data) = newContract.call("");
         require(success, "check return of new contract failed");
@@ -38,11 +34,7 @@ contract CreateTest is Test, NonMatchingSelectorHelper {
         bytes4[] memory func_selectors = new bytes4[](1);
         func_selectors[0] = Create.makeContract.selector;
 
-        bool success = nonMatchingSelectorHelper(
-            func_selectors,
-            callData,
-            address(create)
-        );
+        bool success = nonMatchingSelectorHelper(func_selectors, callData, address(create));
         assert(!success);
     }
 }

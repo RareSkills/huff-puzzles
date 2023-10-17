@@ -17,25 +17,16 @@ contract SumArrayTest is Test, NonMatchingSelectorHelper {
         sumArray = SumArray(HuffDeployer.config().deploy("SumArray"));
     }
 
-    function testSumArray() external {
-        uint256[] memory arr = new uint256[](10);
-        arr[0] = 2;
-        arr[1] = 4;
-        arr[2] = 262;
-        arr[3] = 8;
-        arr[4] = 4;
-        arr[5] = 1;
-        arr[6] = 0;
-        arr[7] = 17;
-        arr[8] = 67251781;
-        arr[9] = 27;
+    function testSumArray(uint256[] memory array) external {
+        uint256 expected;
+        for (uint256 i; i < array.length; ++i) {
+            unchecked {
+                expected += array[i];
+            }
+        }
 
-        uint256 x = sumArray.sumArray(arr);
-        assertEq(x, 67252106, "expected sum of arr to be 67252106");
-
-        uint256[] memory arr2 = new uint256[](0);
-        uint256 x2 = sumArray.sumArray(arr2);
-        assertEq(x2, 0, "expected empty array to return 0");
+        uint256 sum = sumArray.sumArray(array);
+        assertEq(sum, expected, "Wrong sum of array");
     }
 
     /// @notice Test that a non-matching selector reverts
@@ -43,11 +34,7 @@ contract SumArrayTest is Test, NonMatchingSelectorHelper {
         bytes4[] memory func_selectors = new bytes4[](1);
         func_selectors[0] = SumArray.sumArray.selector;
 
-        bool success = nonMatchingSelectorHelper(
-            func_selectors,
-            callData,
-            address(sumArray)
-        );
+        bool success = nonMatchingSelectorHelper(func_selectors, callData, address(sumArray));
         assert(!success);
     }
 }

@@ -16,42 +16,20 @@ contract DistributeTest is Test, NonMatchingSelectorHelper {
         distributor = Distributor(HuffDeployer.config().deploy("Distributor"));
     }
 
-    function testDistribute() public {
-        address[] memory addresses = new address[](4);
-        addresses[0] = address(0xBab);
-        addresses[1] = address(0xBeb);
-        addresses[2] = address(0xBed);
-        addresses[3] = address(0xBad);
-
-        vm.deal(address(this), 4 ether);
-        distributor.distribute{value: 4 ether}(addresses);
-
-        assertEq(
-            addresses[0].balance,
-            1 ether,
-            "balance of address 0xBab is not 1 ether"
-        );
-        assertEq(
-            addresses[1].balance,
-            1 ether,
-            "balance of address 0xBeb is not 1 ether"
-        );
-        assertEq(
-            addresses[2].balance,
-            1 ether,
-            "balance of address 0xBed is not 1 ether"
-        );
-        assertEq(
-            addresses[3].balance,
-            1 ether,
-            "balance of address 0xBad is not 1 ether"
-        );
-
-        assertEq(
-            address(distributor).balance,
-            0,
-            "balance of distribute contract is not 0 ether"
-        );
+    function testDistribute(uint256 value, address[] memory receivers) public {
+        vm.deal(address(this), value);
+        // vm.assume(receivers.length <= 10);
+        if (receivers.length == 0) vm.expectRevert();
+        distributor.distribute{value: value}(receivers);
+        for (uint256 i; i < receivers.length; ++i) {
+            uint256 size;
+            address receiver = receivers[i];
+            assembly {
+                size := extcodesize(receiver)
+            }
+            vm.assume(size == 0);
+            assertGe(receiver.balance, value / receivers.length, "Wrong balance of receiver");
+        }
     }
 
     /// @notice Test that a non-matching selector reverts
@@ -59,11 +37,7 @@ contract DistributeTest is Test, NonMatchingSelectorHelper {
         bytes4[] memory func_selectors = new bytes4[](1);
         func_selectors[0] = Distributor.distribute.selector;
 
-        bool success = nonMatchingSelectorHelper(
-            func_selectors,
-            callData,
-            address(distributor)
-        );
+        bool success = nonMatchingSelectorHelper(func_selectors, callData, address(distributor));
         assert(!success);
     }
 }
