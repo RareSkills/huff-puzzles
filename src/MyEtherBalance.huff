@@ -8,5 +8,16 @@
  */
 
 #define macro MAIN() = takes(0) returns(0) {
-   
+    // put msg.sender address onto the stack
+    caller  // [caller]
+    // get the balance of the address at the top of the stack
+    balance // [balance]
+    0x00    // [0, balance]
+    // store the balance in memory at offset 0
+    mstore  // []
+
+    // return 32 bytes of memory starting at offset 0
+    0x20    // [32]
+    0x00    // [0, 32]
+    return
 }
