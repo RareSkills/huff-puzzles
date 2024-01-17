@@ -12,20 +12,25 @@
 #define function add1(uint256) payable returns(uint256)
 
 #define macro ADD1() = takes(0) returns(0) {
-    0x04 calldataload  // [uint_arg] load the first argument onto the stack
-    0x01               // [1, uint_arg] load 1 on stack
-    add                // [add_result] addition result
+    // load the first argument onto the stack
+    0x04 calldataload  // [uint_arg]
+    0x01               // [1, uint_arg]
+    // add the two values at the top of the stack. Result pushed onto the stack
+    add                // [add_result]
 
-    0x00               // [0, add_result] load 0 onto the stack
-    mstore             // [] store the result of the addition at memory offset 0
+    // store the result of the addition at memory offset 0
+    0x00               // [0, add_result]
+    mstore             // []
 
+    // return the result (32 bytes) of the addition
     0x20               // [32]
     0x00               // [0, 32]
-    return             // [] return the result of the addition
+    return             // []
 }
 
 #define macro MAIN() = takes(0) returns(0) {
-    0x00 calldataload 0xE0 shr  // [func_sig] load the function signature onto the stack
+    // load the function signature onto the stack
+    0x00 calldataload 0xE0 shr  // [func_sig]
 
     // dispatch to the appropriate function (add1)
     dup1 __FUNC_SIG(add1) eq add1 jumpi
