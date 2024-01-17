@@ -11,7 +11,42 @@
 
 #define function multiply(uint256, uint256) payable returns(uint256)
 
+#define macro MULTIPLY() = takes(0) returns(0) {
+    // load the first argument onto the stack
+    0x04 calldataload         // [arg_1]
+    // if the first argument is zero, jump to zero label to return 0
+    dup1 iszero zero jumpi    // if arg_1 == 0, return 0
+
+    // load the second argument onto the stack and swap it with the first arg (avoid x/0 as we know arg_1 != 0)
+    0x24 calldataload swap1   // [arg_1, arg_2]
+    // duplicate the 2nd arg (arg_2), then duplicate the 2nd arg again (arg_1) and multiply them
+    dup2 dup2 mul             // [mul_result, arg_1, arg_2]
+    // duplicate mult_result and store it in memory at offset 0
+    dup1 0x00 mstore          // [mul_result, arg_1, arg_2]
+
+    // if mul_result / arg_1 == arg_2, return mul_result
+    div eq ret jumpi
+
+    // if the multiplication is not correct, revert
+    0x00 0x00 revert
+
+    zero:
+        0x00 0x00 mstore
+        0x20 0x00 return
+    ret:
+        0x20 0x00 return
+}
 
 #define macro MAIN() = takes(0) returns(0) {
+    // load the function signature onto the stack
+    0x00 calldataload 0xe0 shr  // [func_sig]
 
+    // dispatch to the appropriate function (multiply)
+    dup1 __FUNC_SIG(multiply) eq multiply jumpi
+
+    // revert on failed dispatch
+    0x00 0x00 revert
+
+    multiply:
+       MULTIPLY()
 }
