@@ -53,7 +53,7 @@ You should see something like this
 
 ## Suggested order for other exercises
 
-- [CallValue](https://github.com/rareskills/huff-puzzles/blob/main/src/CallValue.huff)
+- [CallValue](https://github.com/rareskills/huff-puzzles/blob/main/src/CallValue.huff) ✅
 - [CalldataLength](https://github.com/rareskills/huff-puzzles/blob/main/src/CalldataLength.huff)
 - [MyEtherBalance](https://github.com/rareskills/huff-puzzles/blob/main/src/MyEtherBalance.huff)
 - [Add1](https://github.com/rareskills/huff-puzzles/blob/main/src/Add1.huff)
