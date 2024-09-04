@@ -1,0 +1,18 @@
+
+/** 
+ *  COUNT_TIME HUFF EXERCISE
+ *
+ *  The task is to write within the `MAIN` macro below, functions named `getTimeElapsed` and `getTimeUntil`. `getTimeElapsed` receives the uint256 parameter and counts how much time elapsed since the provided timestamp, it should return 0 if the provided timestamp is in the future
+ *
+ *  `getTimeUntil` receives uint256 parameter and counts how much time remains until the provided timestamp, it should return 0 if the provided timestamp is in the past
+ *
+ *  NOTICE: The contract should revert when an unrecognized function is called
+ */
+
+#define function getTimeElapsed(uint256) payable returns(uint256)
+#define function getTimeUntil(uint256) payable returns(uint256)
+
+
+#define macro MAIN() = takes(0) returns(0) {
+
+}

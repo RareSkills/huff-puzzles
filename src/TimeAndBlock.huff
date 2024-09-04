@@ -1,0 +1,15 @@
+
+/** 
+ *  TIME_AND_BLOCK HUFF EXERCISE
+ *
+ *  The task is to write within the `MAIN` macro below, a function named `getTimeAndBlock` that and returns current timestamp and block number.
+ *
+ *  NOTICE: The contract should revert when an unrecognized function is called
+ */
+
+#define function getTimeAndBlock() payable returns(uint256, uint256)
+
+
+#define macro MAIN() = takes(0) returns(0) {
+
+}
