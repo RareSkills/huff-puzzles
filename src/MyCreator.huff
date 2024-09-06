@@ -1,13 +1,20 @@
-
 /** 
  *  MY_CREATOR HUFF EXERCISE
  *
- *  The task is to write within the `MAIN` and `CONSTRUCTOR` macros below, a function named `getMyCreator` that return the address of its deployer.
+ *  The task is to write within the `MAIN` and `CONSTRUCTOR` macros below.
+ *
+ *  `CONSTRUCTOR` stores the deployer's address in the state variable.
+ *  `MAIN` returns the address of its deployer.
  *
  *  NOTICE: The contract should revert when an unrecognized function is called
  */
 
 #define function getMyCreator() payable returns(address)
+
+
+// STORAGE
+#define constant DEPLOYER = FREE_STORAGE_POINTER()
+
 
 #define macro CONSTRUCTOR() = takes(0) returns(0) {
 
